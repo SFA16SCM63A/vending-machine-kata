@@ -25,12 +25,12 @@ public class PaymentHelperTest_canReturnAmount {
     @Parameterized.Parameters
     public static Collection<Object[]> getParameters(){
         return Arrays.asList(new Object[][]{
-                {100,true},
-                {200,true},
-                {10,true},
-                {5,true},
-                {13,false},
-                {5.5,false}
+                {0.5,true},
+                {0.65,true},
+                {0.25,true},
+                {0.05,true},
+                {0.04,false},
+                {0.01,false}
         });
     }
 
@@ -47,8 +47,8 @@ public class PaymentHelperTest_canReturnAmount {
             Assert.assertEquals(expectedResult,res);
         }catch (Exception e){
             e.printStackTrace();
+            Assert.assertTrue(false);
         }
-        Assert.assertTrue(false);
     }
 
 

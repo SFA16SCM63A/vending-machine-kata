@@ -29,13 +29,11 @@ public class RemoveProducts_removeProducts_Test extends Helper {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void test_removeProductFromStock_check_exception(){
+    public void test_removeProducts_check_exception(){
         int chipsInStock=10,colaInStock=10,candyInStock=10;
-        int chipsInCart=10,colaInCart=10,candyInCart=10;
         int dimes=1,nickes=1,quarter=1;
         productStock=getProductStock(chipsInStock,colaInStock,candyInStock);
         PaymentHelper paymentHelper=getPaymentHelper(productStock,dimes,nickes,quarter);
-        CartService cartService=getCartservice(chipsInCart,colaInCart,candyInCart);
         boolean res= paymentHelper.removeProductFromStock(null);
     }
 
@@ -43,29 +41,25 @@ public class RemoveProducts_removeProducts_Test extends Helper {
 
     //More product in cart than in stock
     @Test
-    public void test_removeProductFromStock_more_product_in_cart(){
+    public void test_removeProducts_more_product_in_cart(){
         //Just 5 candy available in Stock. But in cart it has 10 candies;
         int chipsInStock=10,colaInStock=10,candyInStock=5;
         int chipsInCart=10,colaInCart=10,candyInCart=10;
-        int dimes=1,nickes=1,quarter=1;
         productStock=getProductStock(chipsInStock,colaInStock,candyInStock);
-        PaymentHelper paymentHelper=getPaymentHelper(productStock,dimes,nickes,quarter);
-        CartService cartService=getCartservice(chipsInCart,colaInCart,candyInCart);
-        boolean res= paymentHelper.removeProductFromStock(cartService);
+        CartService cartService=getCartservice(candyInCart,colaInCart,chipsInCart);
+        boolean res= productStock.removeProducts(cartService);
         Assert.assertEquals(false,res);
     }
 
 
     @Test
-    public void test_removeProductFromStock_remove_products_from_stock(){
+    public void test_removeProducts_remove_products_from_stock(){
         //Just 5 candy available in Stock. But in cart it has 10 candies;
         int chipsInStock=10,colaInStock=10,candyInStock=10;
         int chipsInCart=10,colaInCart=10,candyInCart=10;
-        int dimes=1,nickes=1,quarter=1;
         productStock=getProductStock(chipsInStock,colaInStock,candyInStock);
-        PaymentHelper paymentHelper=getPaymentHelper(productStock,dimes,nickes,quarter);
-        CartService cartService=getCartservice(chipsInCart,colaInCart,candyInCart);
-        boolean res= paymentHelper.removeProductFromStock(cartService);
+        CartService cartService=getCartservice(candyInCart,colaInCart,chipsInCart);
+        boolean res= productStock.removeProducts(cartService);
         if(!res)Assert.assertTrue(false);
         Set<Product> set=productStock.getAllProducts();
         Assert.assertEquals(0,set.size());
@@ -73,15 +67,13 @@ public class RemoveProducts_removeProducts_Test extends Helper {
 
 
     @Test
-    public void test_removeProductFromStock_should_candy_left_in_stock(){
+    public void test_removeProducts_should_candy_left_in_stock(){
         //Just 5 candy available in Stock. But in cart it has 10 candies;
         int chipsInStock=10,colaInStock=10,candyInStock=10;
         int chipsInCart=10,colaInCart=10,candyInCart=5;
-        int dimes=1,nickes=1,quarter=1;
         productStock=getProductStock(chipsInStock,colaInStock,candyInStock);
-        PaymentHelper paymentHelper=getPaymentHelper(productStock,dimes,nickes,quarter);
         CartService cartService=getCartservice(candyInCart,colaInCart,chipsInCart);
-        boolean res= paymentHelper.removeProductFromStock(cartService);
+        boolean res= productStock.removeProducts(cartService);
         if(!res)Assert.assertTrue(false);
         boolean expectedResult=false;
         Set<Product> set=productStock.getAllProducts();
@@ -95,15 +87,13 @@ public class RemoveProducts_removeProducts_Test extends Helper {
     }
 
     @Test
-    public void test_removeProductFromStock_should_all_product_in_stock(){
+    public void test_removeProducts_should_all_product_in_stock(){
         //Just 5 candy available in Stock. But in cart it has 10 candies;
         int chipsInStock=10,colaInStock=10,candyInStock=10;
         int chipsInCart=5,colaInCart=5,candyInCart=5;
-        int dimes=1,nickes=1,quarter=1;
         productStock=getProductStock(chipsInStock,colaInStock,candyInStock);
-        PaymentHelper paymentHelper=getPaymentHelper(productStock,dimes,nickes,quarter);
         CartService cartService=getCartservice(candyInCart,colaInCart,chipsInCart);
-        boolean res= paymentHelper.removeProductFromStock(cartService);
+        boolean res= productStock.removeProducts(cartService);
         if(!res)Assert.assertTrue(false);
         boolean expectedResult=false;
         Set<Product> set=productStock.getAllProducts();

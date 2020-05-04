@@ -25,7 +25,7 @@ public class PaymentHelper_makePayment_test extends Helper {
         int dimes=1,nickes=1,quarter=1;
         productStock=getProductStock(chipsInStock,colaInStock,candyInStock);
         PaymentHelper paymentHelper=getPaymentHelper(productStock,dimes,nickes,quarter);
-        CartService cartService=getCartservice(chipsInCart,colaInCart,candyInCart);
+        CartService cartService=getCartservice(candyInCart,colaInCart,chipsInCart);
         double amountReturned= paymentHelper.makePayment(cartService);
         double totalAmount=totalAmount(dimes,nickes,quarter);
 
@@ -40,7 +40,7 @@ public class PaymentHelper_makePayment_test extends Helper {
         int dimes=0,nickes=0,quarter=86;
         productStock=getProductStock(chipsInStock,colaInStock,candyInStock);
         PaymentHelper paymentHelper=getPaymentHelper(productStock,dimes,nickes,quarter);
-        CartService cartService=getCartservice(chipsInCart,colaInCart,candyInCart);
+        CartService cartService=getCartservice(candyInCart,colaInCart,chipsInCart);
         double amountReturned= paymentHelper.makePayment(cartService);
         Assert.assertEquals(0,amountReturned,0);
     }
@@ -54,7 +54,7 @@ public class PaymentHelper_makePayment_test extends Helper {
         int dimes=0,nickes=0,quarter=86;
         productStock=getProductStock(chipsInStock,colaInStock,candyInStock);
         PaymentHelper paymentHelper=getPaymentHelper(productStock,dimes,nickes,quarter);
-        CartService cartService=getCartservice(chipsInCart,colaInCart,candyInCart);
+        CartService cartService=getCartservice(candyInCart,colaInCart,chipsInCart);
         double amountReturned= paymentHelper.makePayment(cartService);
         double totalAmount=totalAmount(dimes,nickes,quarter);
         Assert.assertEquals(totalAmount,amountReturned,0);

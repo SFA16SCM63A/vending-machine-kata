@@ -9,6 +9,7 @@ import com.teksystems.machine.intr.PaymentHelper;
 import com.teksystems.machine.intr.Product;
 import com.teksystems.machine.intr.ProductStock;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class PaymentHelperImpl implements PaymentHelper {
@@ -90,6 +91,10 @@ public class PaymentHelperImpl implements PaymentHelper {
             extraAmount=extraAmount%coin.amount;
             if(extraAmount==0)return true;
         }
+
+        DecimalFormat df = new DecimalFormat("#.00");
+        String extraAmountStr = df.format(extraAmount);
+        if(Double.parseDouble(extraAmountStr)==0)return true;
         return false;
     }
 

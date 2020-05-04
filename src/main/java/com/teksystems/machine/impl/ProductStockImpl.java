@@ -29,7 +29,7 @@ public class ProductStockImpl implements ProductStock {
 
     @Override
     public boolean checkAvaliable(CartService cartBO){
-        if(productStackMap==null||cartBO==null)throw new IllegalStateException();
+        if(productStackMap==null||cartBO==null)throw new IllegalArgumentException();
         Map<Product,Integer> cartProducts=cartBO.getMapProducts();
         for(Map.Entry<Product,Integer> entry:cartProducts.entrySet()){
             Integer stockProductCount=productStackMap.get(entry.getKey());
