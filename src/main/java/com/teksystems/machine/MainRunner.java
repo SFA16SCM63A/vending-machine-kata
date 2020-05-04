@@ -30,15 +30,20 @@ public class MainRunner {
            boolean addMoreProduct=true;
            CartService cartBO=new CartService();
            while(addMoreProduct){
+               System.out.println("\n");
                  for(int itr=0;itr<products.size();itr++){
                      System.out.println(" "+(itr+1)+". "+products.get(itr).products.toString());
                  }
                  System.out.println("8. Abort");
                  System.out.println("9. Make Payment");
                  System.out.println("Cart info: "+cartBO);
-                 System.out.println("Enter number: ");
-                 selectedChoice=sc.nextInt();
-
+                 System.out.print("Enter number: ");
+                 try {
+                     selectedChoice = Integer.parseInt(sc.nextLine());
+                 }catch (Exception e){
+                     System.err.println("Please enter valid number!!!!");
+                     continue;
+                 }
                  if(selectedChoice==8||selectedChoice==9){
                      addMoreProduct=false;
                  }else if(selectedChoice>products.size()){
@@ -75,21 +80,26 @@ public class MainRunner {
     private static List<Coin> getCoins(Scanner scanner) {
         List<Coin> list=new ArrayList<>();
 
+        Integer selectedChoice=0;
         do{
             System.out.println("Select coin you want to add: ");
             System.out.println("1. Dimes");
             System.out.println("2. Nickels");
             System.out.println("3. Quarters");
             System.out.println("9. Exit");
-            Integer val=scanner.nextInt();
-            switch (val){
+            try{
+                selectedChoice=Integer.parseInt(scanner.nextLine());
+            }catch (Exception e){
+                System.out.println("Please enter proper choice!!!");
+            }
+            switch (selectedChoice){
                 case 1: list.add(new Dimes());break;
                 case 2: list.add(new Nickels());break;
                 case 3: list.add(new Quarters());break;
                 case 9: return list;
                 default: System.err.println("Invalid choice");
             }
-        }while(scanner.hasNext());
+        }while(selectedChoice!=9);
 
         return list;
     }
