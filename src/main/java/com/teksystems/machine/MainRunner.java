@@ -35,17 +35,23 @@ public class MainRunner {
                  }
                  System.out.println("8. Abort");
                  System.out.println("9. Make Payment");
+                 System.out.println("Cart info: "+cartBO);
                  System.out.println("Enter number: ");
                  selectedChoice=sc.nextInt();
+
                  if(selectedChoice==8||selectedChoice==9){
                      addMoreProduct=false;
-                 }else{
-                     Product product=products.get(selectedChoice);
+                 }else if(selectedChoice>products.size()){
+                         System.out.println("Invalid Choice!!!!");
+                         continue;
+                 } else{
+                     Product product=products.get(selectedChoice-1);
                      if(product==null){
                          System.err.println("Please enter proper choice!!!");
                          continue;
                      }
                      Integer addedCount=cartBO.getTotalProductsPresent(product);
+                     if(addedCount==null)addedCount=0;
                      if(productStockService.isProductAvailable(product,addedCount+1)){
                          cartBO.addToCart(product);
                      }else{
@@ -60,13 +66,16 @@ public class MainRunner {
             PaymentHelperImpl paymentHelper=new PaymentHelperImpl(productStockService);
             paymentHelper.totalPaymentReceived(getCoins(sc));
             paymentHelper.makePayment(cartBO);
+            System.out.println("*********Completed Transaction*****************\n\n");
+            System.out.println("Welcome!!!!");
+
         }
     }
 
     private static List<Coin> getCoins(Scanner scanner) {
         List<Coin> list=new ArrayList<>();
 
-        while(scanner.hasNext()){
+        do{
             System.out.println("Select coin you want to add: ");
             System.out.println("1. Dimes");
             System.out.println("2. Nickels");
@@ -80,7 +89,7 @@ public class MainRunner {
                 case 9: return list;
                 default: System.err.println("Invalid choice");
             }
-        }
+        }while(scanner.hasNext());
 
         return list;
     }

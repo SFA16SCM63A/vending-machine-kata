@@ -30,4 +30,10 @@ public class CartService {
         return mapProducts.get(product);
     }
 
+    @Override
+    public String toString() {
+        return "CartService{" +
+                "mapProducts=" + mapProducts +
+                '}';
+    }
 }
