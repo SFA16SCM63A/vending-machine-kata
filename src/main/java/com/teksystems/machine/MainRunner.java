@@ -38,16 +38,18 @@ public class MainRunner {
                  System.out.println("9. Make Payment");
                  System.out.println("Cart info: "+cartBO);
                  System.out.print("Enter number: ");
+
                  try {
                      selectedChoice = Integer.parseInt(sc.nextLine());
                  }catch (Exception e){
                      System.err.println("Please enter valid number!!!!");
                      continue;
                  }
+
                  if(selectedChoice==8||selectedChoice==9){
                      addMoreProduct=false;
-                 }else if(selectedChoice>products.size()){
-                         System.out.println("Invalid Choice!!!!");
+                 }else if(selectedChoice>products.size()||selectedChoice==0){
+                         System.err.println("Invalid Choice!!!!");
                          continue;
                  } else{
                      Product product=products.get(selectedChoice-1);
@@ -82,11 +84,13 @@ public class MainRunner {
 
         Integer selectedChoice=0;
         do{
-            System.out.println("Select coin you want to add: ");
+            System.out.println("\nSelect coin you want to add: ");
             System.out.println("1. Dimes");
             System.out.println("2. Nickels");
             System.out.println("3. Quarters");
             System.out.println("9. Exit");
+            System.out.println("Cart: "+list);
+            System.out.print("\nEnter choice: ");
             try{
                 selectedChoice=Integer.parseInt(scanner.nextLine());
             }catch (Exception e){
